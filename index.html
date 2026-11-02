@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Taskflow | Task Manager</title>
+  <meta name="description" content="A no-framework JavaScript task manager with undo, drag and drop and saved filters.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <main class="app">
+    <header class="top">
+      <h1>Taskflow</h1>
+      <button id="help-btn" class="btn ghost" type="button" aria-label="Show keyboard shortcuts">? Shortcuts</button>
+    </header>
+
+    <form id="add-form" class="row" autocomplete="off">
+      <label class="grow"><span class="vh">New task</span><input id="new-title" required maxlength="120" placeholder="Add a task (press N)"></label>
+      <label><span class="vh">Priority</span><select id="new-priority"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select></label>
+      <label><span class="vh">Due date</span><input id="new-due" type="date"></label>
+      <button class="btn" type="submit">Add</button>
+    </form>
+
+    <section class="row toolbar" aria-label="Search, filter and sort">
+      <label class="grow"><span class="vh">Search tasks</span><input id="search" type="search" placeholder="Search (press /)"></label>
+      <label>Status <select id="f-status"><option value="all">All</option><option value="active">Active</option><option value="done">Done</option></select></label>
+      <label>Priority <select id="f-priority"><option value="all">All</option><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select></label>
+      <label>Sort <select id="f-sort"><option value="manual">Manual</option><option value="created">Newest</option><option value="priority">Priority</option><option value="due">Due date</option><option value="title">Title</option></select></label>
+      <button id="undo" class="btn ghost" type="button" aria-label="Undo">Undo</button>
+      <button id="redo" class="btn ghost" type="button" aria-label="Redo">Redo</button>
+    </section>
+
+    <p class="meta"><span id="count"></span> <span id="drag-hint">Drag tasks to reorder (Manual sort only).</span></p>
+    <ul id="list" class="list" aria-label="Tasks"></ul>
+    <p id="empty" class="empty" hidden>No tasks match. Try clearing the search or filters.</p>
+    <p id="status" class="vh" role="status" aria-live="polite"></p>
+    <p id="toast" class="toast" aria-hidden="true"></p>
+  </main>
+
+  <dialog id="help">
+    <h2>Keyboard shortcuts</h2>
+    <dl>
+      <dt><kbd>N</kbd></dt><dd>New task</dd>
+      <dt><kbd>/</kbd></dt><dd>Search</dd>
+      <dt><kbd>Ctrl</kbd>+<kbd>Z</kbd></dt><dd>Undo (last 20 actions)</dd>
+      <dt><kbd>Ctrl</kbd>+<kbd>Y</kbd> or <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd></dt><dd>Redo</dd>
+      <dt><kbd>Esc</kbd></dt><dd>Clear search / leave field</dd>
+      <dt><kbd>?</kbd></dt><dd>This help</dd>
+    </dl>
+    <p>Double-click a task title to edit it.</p>
+    <form method="dialog"><button class="btn">Close</button></form>
+  </dialog>
+</body>
+</html>
